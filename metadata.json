@@ -1,0 +1,8 @@
+{
+  "name": "ExTest to SmartTest Converter",
+  "description": "Bộ công cụ chuyển đổi đề thi LaTeX ex_test sang định dạng SmartTest, chuẩn hóa công thức MathType và render hình vẽ TikZ thành PNG chèn trực tiếp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
