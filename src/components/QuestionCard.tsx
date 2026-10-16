@@ -8,12 +8,14 @@ interface QuestionCardProps {
   question: ParsedQuestion;
   settings: ConversionSettings;
   onPreviewImage: (block: TikzBlock) => void;
+  onRetryTikz?: (blockId: string) => void;
 }
 
 export const QuestionCard: React.FC<QuestionCardProps> = ({
   question,
   settings,
   onPreviewImage,
+  onRetryTikz,
 }) => {
   const [showSolution, setShowSolution] = useState(true);
   const [showRawLatex, setShowRawLatex] = useState(false);
@@ -118,6 +120,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
           tikzBlocks={question.tikzBlocks}
           tabularBlocks={question.tabularBlocks}
           onPreviewImage={onPreviewImage}
+          onRetryTikz={onRetryTikz}
         />
       </div>
 
@@ -151,6 +154,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
                     tikzBlocks={question.tikzBlocks}
                     tabularBlocks={question.tabularBlocks}
                     onPreviewImage={onPreviewImage}
+                    onRetryTikz={onRetryTikz}
                   />
                 </div>
 
@@ -175,6 +179,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
             tikzBlocks={question.tikzBlocks}
             tabularBlocks={question.tabularBlocks}
             onPreviewImage={onPreviewImage}
+            onRetryTikz={onRetryTikz}
           />
         </div>
       )}
@@ -199,6 +204,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
                 tikzBlocks={question.tikzBlocks}
                 tabularBlocks={question.tabularBlocks}
                 onPreviewImage={onPreviewImage}
+                onRetryTikz={onRetryTikz}
               />
             </div>
           )}

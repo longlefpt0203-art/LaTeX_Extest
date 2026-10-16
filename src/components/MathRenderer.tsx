@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import katex from 'katex';
 import { TikzBlock } from '../types';
 import { TabularBlock, tabularBlockToTsv } from '../utils/tabularParser';
-import { Table as TableIcon, Copy, Check } from 'lucide-react';
+import { Table as TableIcon, Copy, Check, RefreshCw } from 'lucide-react';
 
 interface MathRendererProps {
   content: string;
@@ -10,6 +10,7 @@ interface MathRendererProps {
   tabularBlocks?: TabularBlock[];
   className?: string;
   onPreviewImage?: (block: TikzBlock) => void;
+  onRetryTikz?: (blockId: string) => void;
 }
 
 const TabularRenderer: React.FC<{
@@ -279,10 +280,24 @@ export const MathRenderer: React.FC<MathRendererProps> = ({
           return (
             <div
               key={index}
-              className="my-3 p-3 bg-red-950/40 border border-red-500/30 rounded-lg text-xs text-red-300"
+              className="my-3 p-3.5 bg-red-950/40 border border-red-500/30 rounded-lg text-xs text-red-300 flex flex-col gap-2"
             >
-              <div className="font-semibold mb-1">Lỗi biên dịch TikZ ({block.id}):</div>
-              <div className="font-mono text-[11px] text-red-400/80 break-words">
+              <div className="flex items-center justify-between">
+                <div className="font-semibold text-red-400 flex items-center gap-1.5">
+                  <span>Lỗi biên dịch TikZ ({block.id})</span>
+                </div>
+                {onRetryTikz && (
+                  <button
+                    onClick={() => onRetryTikz(block.id)}
+                    className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium bg-red-800/60 hover:bg-red-700 text-red-100 rounded border border-red-500/50 transition-colors shadow-xs cursor-pointer"
+                    title="Thử lại biên dịch hình vẽ TikZ này"
+                  >
+                    <RefreshCw className="w-3 h-3" />
+                    Thử lại
+                  </button>
+                )}
+              </div>
+              <div className="font-mono text-[11px] text-red-300/80 bg-red-950/70 p-2 rounded border border-red-900/60 break-words">
                 {block.errorMsg || 'Không thể render'}
               </div>
             </div>
